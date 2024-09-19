@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختر الإجابة الصحيحة</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            direction: rtl;
+            text-align: right;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .question-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .answers button {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            background-color: #f4f4f4;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .answers button.correct {
+            background-color: #20eb27;
+        }
+        .answers button.wrong {
+            background-color: #df2f40;
+        }
+        #successMessage {
+            display: none; /* Hidden initially */
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>اختر الإجابة الصحيحة</h1>
+
+    <!-- السؤال الأول -->
+    <div class="question-container">
+        <p> ولد محمد رسول الله في مدينة</p>
+        <div class="answers">
+            <button onclick="checkAnswer(this, true)">بمكة</button>
+            <button onclick="checkAnswer(this, false)">بالمدينة</button>
+            <button onclick="checkAnswer(this, false)">بالطائف</button>
+        </div>
+    </div>
+    <div class="question-container">
+        <p> ولد الرسول محمد صلى الله عليه وسلم في يوم</p>
+        <div class="answers">
+            <button onclick="checkAnswer(this, false)">الخميس</button>
+            <button onclick="checkAnswer(this, true)">الإثنين</button>
+            <button onclick="checkAnswer(this, false)">الجمعة</button>
+        </div>
+    </div>
+    <div class="question-container">
+        <p> ولد الرسول محمد صلى الله عليه وسلم في 12</p>
+        <div class="answers">
+            <button onclick="checkAnswer(this, false)">ربيع الثاني</button>
+            <button onclick="checkAnswer(this, true)">ربيع الأول</button>
+            <button onclick="checkAnswer(this, false)">رمضان</button>
+        </div>
+    </div>
+    
+    <!-- السؤال الثاني -->
+    <div class="question-container">
+        <p>أبوه</p>
+        <div class="answers">
+            <button onclick="checkAnswer(this, false)">عبد المطلب</button>
+            <button onclick="checkAnswer(this, false)">أبو طالب</button>
+            <button onclick="checkAnswer(this, true)">عبد الله</button>
+        </div>
+    </div>
+
+    <!-- السؤال الثالث -->
+    <div class="question-container">
+        <p>أمه</p>
+        <div class="answers">
+            <button onclick="checkAnswer(this, true)">أمنة بنت وهب</button>
+            <button onclick="checkAnswer(this, false)">خديجة بنت خويلد</button>
+            <button onclick="checkAnswer(this, false)">ماريا القبطية</button>
+        </div>
+    </div>
+    <div class="question-container">
+        <p>ماتت أمه وكان عمره</p>
+        <div class="answers">
+            <button onclick="checkAnswer(this, true)">6 سنوات</button>
+            <button onclick="checkAnswer(this, false)">8 سنوات</button>
+            <button onclick="checkAnswer(this, false)">12 سنة</button>
+        </div>
+    </div>
+    <div class="question-container">
+        <p>جده</p>
+        <div class="answers">
+            <button onclick="checkAnswer(this, true)">عبد المطلب</button>
+            <button onclick="checkAnswer(this, false)">عبد الله</button>
+            <button onclick="checkAnswer(this, false)">ابو طالب</button>
+        </div>
+    </div>
+    <div class="question-container">
+        <p>عمه</p>
+        <div class="answers">
+            <button onclick="checkAnswer(this, false)">عبد الله</button>
+            <button onclick="checkAnswer(this, true)">أبو طالب</button>
+            <button onclick="checkAnswer(this, false)">عبد المطلب</button>
+        </div>
+    </div>
+    <div class="question-container">
+        <p>مات جده وكان عمره</p>
+        <div class="answers">
+            <button onclick="checkAnswer(this, false)">6 سنوات</button>
+            <button onclick="checkAnswer(this, false)">9 سنوات</button>
+            <button onclick="checkAnswer(this, true)">8 سنوات</button>
+        </div>
+    </div>
+    <div class="question-container">
+        <p>زوجته</p>
+        <div class="answers">
+            <button onclick="checkAnswer(this, true)">خديجة بنت خويلد</button>
+            <button onclick="checkAnswer(this, false)">حليمة السعدية</button>
+            <button onclick="checkAnswer(this, false)">آمنة بنت وهب</button>
+        </div>
+    </div>
+    <div class="question-container">
+        <p>مرضعته</p>
+        <div class="answers">
+            <button onclick="checkAnswer(this, false)">خديجة بنت خويلد</button>
+            <button onclick="checkAnswer(this, true)">حليمة السعدية</button>
+            <button onclick="checkAnswer(this, false)">آمنة بنت وهب</button>
+        </div>
+    </div>
+    <div id="successMessage" style="display: none; text-align: center;">
+        <h2>Du är jätte duktig Sara!</h2>
+        <button onclick="goToSuccessPage()">انتقل إلى الصفحة الجديدة</button>
+    </div>
+    
+
+    <script>
+        let correctAnswersCount = 0;
+        const totalQuestions = 12; // Adjusted to match the actual number of questions
+        function checkAnswer(button, isCorrect) {
+    if (isCorrect) {
+        button.classList.add('correct');
+        correctAnswersCount++;
+
+        // Check if all answers are correct
+        if (correctAnswersCount === totalQuestions) {
+            console.log("All answers are correct. Showing success message...");
+            document.getElementById("successMessage").style.display = "block"; // Show the success message
+        }
+
+        // Disable all buttons for this question
+        const buttons = button.parentElement.querySelectorAll('button');
+        buttons.forEach(btn => btn.disabled = true);
+    } else {
+        button.classList.add('wrong');
+        // Allow the user to try again
+        button.parentElement.querySelectorAll('button').forEach(btn => {
+            btn.disabled = false; // Enable all buttons again
+        });
+    }
+}
+
+function goToSuccessPage() {
+    window.location.href = 'su.html'; // Redirect to the success page
+}
+
+    </script>
+
+</body>
+</html>
